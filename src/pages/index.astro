@@ -1,5 +1,10 @@
 ---
+import {APOD_API_KEY} from "astro:env/server";
+import { Image } from "astro:assets";
 
+const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${APOD_API_KEY}`, {method:'GET'});
+const data = await response.json();
+console.log(data);
 ---
 
 <html lang="en">
@@ -11,6 +16,6 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+    <Image src={data.url} alt={data.title} inferSize />
 	</body>
 </html>
